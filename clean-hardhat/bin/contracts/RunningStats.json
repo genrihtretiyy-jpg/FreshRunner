@@ -1,0 +1,357 @@
+{
+    "contractName": "RunningStats",
+    "abi": [
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "_km",
+                    "type": "uint256"
+                }
+            ],
+            "name": "logRun",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "runs",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "totalKm",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        }
+    ],
+    "metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_km\",\"type\":\"uint256\"}],\"name\":\"logRun\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"runs\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"totalKm\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"c:/Users/\\u0413\\u0440\\u044f\\u0437\\u043d\\u044b\\u0439 \\u0414\\u0436\\u043e/Desktop/newVarik/clean-hardhat/contracts/RunningStats.sol\":\"RunningStats\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[],\"viaIR\":true},\"sources\":{\"c:/Users/\\u0413\\u0440\\u044f\\u0437\\u043d\\u044b\\u0439 \\u0414\\u0436\\u043e/Desktop/newVarik/clean-hardhat/contracts/RunningStats.sol\":{\"keccak256\":\"0x7779c75d82674294bff6b4862a14557b2ab4ce441a37ab96e13da59ed283d62f\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ef04c3a95453363cac7be443e4d19384b56039bb4e7367b459704cb1f32cb1fd\",\"dweb:/ipfs/QmRqA1nju55k1f2CQbro3X8Vuf4QbTowFrHHNoZN3v6dFX\"]}},\"version\":1}",
+    "bytecode": "6080806040523461001c575f80555f60015560ec90816100218239f35b5f80fdfe608060405260043610156010575f80fd5b5f803560e01c80631df9f43e146070578063b5b24fd41460545763fc3b7e70146037575f80fd5b346051578060031936011260515760209054604051908152f35b80fd5b5034605157806003193601126051576020600154604051908152f35b503460515760203660031901126051578054600435810180911160a25781556001546001810180911160a25760015580f35b634e487b7160e01b82526011600452602482fdfea2646970667358221220b068c088e206457b39b0bb7bf381987157b441657b6cf5e40b7869990e83356c64736f6c63430008140033",
+    "deployedBytecode": "608060405260043610156010575f80fd5b5f803560e01c80631df9f43e146070578063b5b24fd41460545763fc3b7e70146037575f80fd5b346051578060031936011260515760209054604051908152f35b80fd5b5034605157806003193601126051576020600154604051908152f35b503460515760203660031901126051578054600435810180911160a25781556001546001810180911160a25760015580f35b634e487b7160e01b82526011600452602482fdfea2646970667358221220b068c088e206457b39b0bb7bf381987157b441657b6cf5e40b7869990e83356c64736f6c63430008140033",
+    "sourceMap": "61:192:0:-:0;;;;;;;115:1;61:192;;115:1;145;61:192;;;;;;;;;;;",
+    "deployedSourceMap": "61:192:0:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;123:23;61:192;;;;;;;;;;;;;;-1:-1:-1;;61:192:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;61:192:0;;;;;;;",
+    "sourcePath": "c:/Users/Грязный Джо/Desktop/newVarik/clean-hardhat/contracts/RunningStats.sol",
+    "compiler": {
+        "name": "solc",
+        "version": "0.8.20+commit.a1b79de6"
+    },
+    "ast": {
+        "absolutePath": "c:/Users/Грязный Джо/Desktop/newVarik/clean-hardhat/contracts/RunningStats.sol",
+        "exportedSymbols": {
+            "RunningStats": [
+                22
+            ]
+        },
+        "id": 23,
+        "license": "MIT",
+        "nodeType": "SourceUnit",
+        "nodes": [
+            {
+                "id": 1,
+                "literals": [
+                    "solidity",
+                    "^",
+                    "0.8",
+                    ".20"
+                ],
+                "nodeType": "PragmaDirective",
+                "src": "33:24:0"
+            },
+            {
+                "abstract": false,
+                "baseContracts": [],
+                "canonicalName": "RunningStats",
+                "contractDependencies": [],
+                "contractKind": "contract",
+                "fullyImplemented": true,
+                "id": 22,
+                "linearizedBaseContracts": [
+                    22
+                ],
+                "name": "RunningStats",
+                "nameLocation": "70:12:0",
+                "nodeType": "ContractDefinition",
+                "nodes": [
+                    {
+                        "constant": false,
+                        "functionSelector": "fc3b7e70",
+                        "id": 4,
+                        "mutability": "mutable",
+                        "name": "totalKm",
+                        "nameLocation": "105:7:0",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 22,
+                        "src": "90:26:0",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                        },
+                        "typeName": {
+                            "id": 2,
+                            "name": "uint256",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "90:7:0",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                            }
+                        },
+                        "value": {
+                            "hexValue": "30",
+                            "id": 3,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "115:1:0",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                            },
+                            "value": "0"
+                        },
+                        "visibility": "public"
+                    },
+                    {
+                        "constant": false,
+                        "functionSelector": "b5b24fd4",
+                        "id": 7,
+                        "mutability": "mutable",
+                        "name": "runs",
+                        "nameLocation": "138:4:0",
+                        "nodeType": "VariableDeclaration",
+                        "scope": 22,
+                        "src": "123:23:0",
+                        "stateVariable": true,
+                        "storageLocation": "default",
+                        "typeDescriptions": {
+                            "typeIdentifier": "t_uint256",
+                            "typeString": "uint256"
+                        },
+                        "typeName": {
+                            "id": 5,
+                            "name": "uint256",
+                            "nodeType": "ElementaryTypeName",
+                            "src": "123:7:0",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_uint256",
+                                "typeString": "uint256"
+                            }
+                        },
+                        "value": {
+                            "hexValue": "30",
+                            "id": 6,
+                            "isConstant": false,
+                            "isLValue": false,
+                            "isPure": true,
+                            "kind": "number",
+                            "lValueRequested": false,
+                            "nodeType": "Literal",
+                            "src": "145:1:0",
+                            "typeDescriptions": {
+                                "typeIdentifier": "t_rational_0_by_1",
+                                "typeString": "int_const 0"
+                            },
+                            "value": "0"
+                        },
+                        "visibility": "public"
+                    },
+                    {
+                        "body": {
+                            "id": 20,
+                            "nodeType": "Block",
+                            "src": "197:53:0",
+                            "statements": [
+                                {
+                                    "expression": {
+                                        "id": 14,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "lValueRequested": false,
+                                        "leftHandSide": {
+                                            "id": 12,
+                                            "name": "totalKm",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 4,
+                                            "src": "208:7:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_uint256",
+                                                "typeString": "uint256"
+                                            }
+                                        },
+                                        "nodeType": "Assignment",
+                                        "operator": "+=",
+                                        "rightHandSide": {
+                                            "id": 13,
+                                            "name": "_km",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 9,
+                                            "src": "219:3:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_uint256",
+                                                "typeString": "uint256"
+                                            }
+                                        },
+                                        "src": "208:14:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "id": 15,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "208:14:0"
+                                },
+                                {
+                                    "expression": {
+                                        "id": 18,
+                                        "isConstant": false,
+                                        "isLValue": false,
+                                        "isPure": false,
+                                        "lValueRequested": false,
+                                        "leftHandSide": {
+                                            "id": 16,
+                                            "name": "runs",
+                                            "nodeType": "Identifier",
+                                            "overloadedDeclarations": [],
+                                            "referencedDeclaration": 7,
+                                            "src": "233:4:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_uint256",
+                                                "typeString": "uint256"
+                                            }
+                                        },
+                                        "nodeType": "Assignment",
+                                        "operator": "+=",
+                                        "rightHandSide": {
+                                            "hexValue": "31",
+                                            "id": 17,
+                                            "isConstant": false,
+                                            "isLValue": false,
+                                            "isPure": true,
+                                            "kind": "number",
+                                            "lValueRequested": false,
+                                            "nodeType": "Literal",
+                                            "src": "241:1:0",
+                                            "typeDescriptions": {
+                                                "typeIdentifier": "t_rational_1_by_1",
+                                                "typeString": "int_const 1"
+                                            },
+                                            "value": "1"
+                                        },
+                                        "src": "233:9:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "id": 19,
+                                    "nodeType": "ExpressionStatement",
+                                    "src": "233:9:0"
+                                }
+                            ]
+                        },
+                        "functionSelector": "1df9f43e",
+                        "id": 21,
+                        "implemented": true,
+                        "kind": "function",
+                        "modifiers": [],
+                        "name": "logRun",
+                        "nameLocation": "168:6:0",
+                        "nodeType": "FunctionDefinition",
+                        "parameters": {
+                            "id": 10,
+                            "nodeType": "ParameterList",
+                            "parameters": [
+                                {
+                                    "constant": false,
+                                    "id": 9,
+                                    "mutability": "mutable",
+                                    "name": "_km",
+                                    "nameLocation": "183:3:0",
+                                    "nodeType": "VariableDeclaration",
+                                    "scope": 21,
+                                    "src": "175:11:0",
+                                    "stateVariable": false,
+                                    "storageLocation": "default",
+                                    "typeDescriptions": {
+                                        "typeIdentifier": "t_uint256",
+                                        "typeString": "uint256"
+                                    },
+                                    "typeName": {
+                                        "id": 8,
+                                        "name": "uint256",
+                                        "nodeType": "ElementaryTypeName",
+                                        "src": "175:7:0",
+                                        "typeDescriptions": {
+                                            "typeIdentifier": "t_uint256",
+                                            "typeString": "uint256"
+                                        }
+                                    },
+                                    "visibility": "internal"
+                                }
+                            ],
+                            "src": "174:13:0"
+                        },
+                        "returnParameters": {
+                            "id": 11,
+                            "nodeType": "ParameterList",
+                            "parameters": [],
+                            "src": "197:0:0"
+                        },
+                        "scope": 22,
+                        "src": "159:91:0",
+                        "stateMutability": "nonpayable",
+                        "virtual": false,
+                        "visibility": "external"
+                    }
+                ],
+                "scope": 23,
+                "src": "61:192:0",
+                "usedErrors": [],
+                "usedEvents": []
+            }
+        ],
+        "src": "33:222:0"
+    },
+    "functionHashes": {
+        "logRun(uint256)": "1df9f43e",
+        "runs()": "b5b24fd4",
+        "totalKm()": "fc3b7e70"
+    },
+    "gasEstimates": {
+        "creation": {
+            "codeDepositCost": "47200",
+            "executionCost": "10115",
+            "totalCost": "57315"
+        },
+        "external": {
+            "logRun(uint256)": "48607",
+            "runs()": "2276",
+            "totalKm()": "2293"
+        }
+    }
+}
