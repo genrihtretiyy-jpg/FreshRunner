@@ -82,10 +82,8 @@ def telegram_bot():
 @app.route('/')
 def home():
     return jsonify({
-        "status": "FreshRunner LIVE 🏃‍♂️🔗 Sepolia",
-        "endpoints": ["/logrun POST km=5.2", "/blockchain/stats GET", "/health"],
-        "runs": 0,
-        "version": "02.02.2026 Norilsk Blockchain Runner"
+        "status": "FreshRunner LIVE", 
+        "endpoints": ["/logrun POST", "/blockchain/stats GET"]
     })
 
 @app.route('/index')
