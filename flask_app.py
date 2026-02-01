@@ -80,6 +80,15 @@ def telegram_bot():
 
 # MINI APP РОУТЫ
 @app.route('/')
+def home():
+    return jsonify({
+        "status": "FreshRunner LIVE 🏃‍♂️🔗 Sepolia",
+        "endpoints": ["/logrun POST km=5.2", "/blockchain/stats GET", "/health"],
+        "runs": len(os.listdir('contracts.db') if os.path.exists('contracts.db') else []),
+        "version": "02.02.2026 Norilsk Blockchain Runner"
+    })
+
+@app.route('/index')
 def index():
     return render_template('index.html')
 
@@ -113,15 +122,6 @@ def stats():
         })
     except Exception as e:
         return jsonify({"error": f"Blockchain error: {str(e)}"}), 500
-
-@app.route('/')
-def home():
-    return jsonify({
-        "status": "FreshRunner LIVE 🏃‍♂️🔗 Sepolia",
-        "endpoints": ["/logrun POST km=5.2", "/blockchain/stats GET", "/health"],
-        "runs": len(os.listdir('contracts.db') if os.path.exists('contracts.db') else []),
-        "version": "02.02.2026 Norilsk Blockchain Runner"
-    })
 
 @app.route('/health')
 def health():
