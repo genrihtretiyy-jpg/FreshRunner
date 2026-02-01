@@ -81,24 +81,12 @@ def telegram_bot():
 # MINI APP РОУТЫ
 @app.route('/')
 def home():
-    try:
-        runs_count = 0
-        if os.path.exists('contracts.db'):
-            runs_count = len(os.listdir('contracts.db'))
-        return jsonify({
-            "status": "FreshRunner LIVE 🏃‍♂️🔗 Sepolia",
-            "endpoints": ["/logrun POST km=5.2", "/blockchain/stats GET", "/health"],
-            "runs": runs_count,
-            "version": "02.02.2026 Norilsk Blockchain Runner"
-        })
-    except Exception as e:
-        return jsonify({
-            "status": "FreshRunner LIVE 🏃‍♂️🔗 Sepolia",
-            "endpoints": ["/logrun POST km=5.2", "/blockchain/stats GET", "/health"],
-            "runs": 0,
-            "version": "02.02.2026 Norilsk Blockchain Runner",
-            "error": str(e)
-        })
+    return jsonify({
+        "status": "FreshRunner LIVE 🏃‍♂️🔗 Sepolia",
+        "endpoints": ["/logrun POST km=5.2", "/blockchain/stats GET", "/health"],
+        "runs": 0,
+        "version": "02.02.2026 Norilsk Blockchain Runner"
+    })
 
 @app.route('/index')
 def index():
