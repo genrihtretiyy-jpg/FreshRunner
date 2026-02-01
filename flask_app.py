@@ -114,6 +114,24 @@ def stats():
     except Exception as e:
         return jsonify({"error": f"Blockchain error: {str(e)}"}), 500
 
+@app.route('/')
+def home():
+    return jsonify({
+        "status": "FreshRunner LIVE 🏃‍♂️🔗 Sepolia",
+        "endpoints": ["/logrun POST km=5.2", "/blockchain/stats GET", "/health"],
+        "runs": len(os.listdir('contracts.db') if os.path.exists('contracts.db') else []),
+        "version": "02.02.2026 Norilsk Blockchain Runner"
+    })
+
+@app.route('/health')
+def health():
+    return jsonify({
+        "status": "OK", 
+        "web3_connected": w3.is_connected(),
+        "contracts_db": os.path.exists('contracts.db'),
+        "wallet": ACCOUNT[:10] + "..."
+    })
+
 if __name__ == '__main__':
     print("🚀 Flask + Telegram Mini App + Bot")
     print("🌐 http://127.0.0.1:5000/ — веб-интерфейс")
