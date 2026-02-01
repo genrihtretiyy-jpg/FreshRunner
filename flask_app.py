@@ -15,7 +15,7 @@ load_dotenv()
 
 # BLOCKCHAIN
 w3 = Web3(Web3.HTTPProvider('https://ethereum-sepolia.publicnode.com'))
-print("✅ Web3 подключён")
+print("Web3 connected")
 
 CONTRACT_ADDRESS = CONTRACT_ADDRESS = "0x54Fc6752C178274eD1bcb7d67ef5D68bAFe07Ccc"
 ACCOUNT = '0xc52c4B6dB509CF99fc85b532b7938e373824c109'
@@ -53,7 +53,7 @@ def blockchain_tx(chat_id, km):
 
 def telegram_bot():
     offset = 0
-    print("🤖 Telegram bot активен")
+    print("Telegram bot active")
     while True:
         try:
             url = f"https://api.telegram.org/bot{TELEGRAM_TOKEN}/getUpdates"
@@ -133,9 +133,9 @@ def health():
     })
 
 if __name__ == '__main__':
-    print("🚀 Flask + Telegram Mini App + Bot")
-    print("🌐 http://127.0.0.1:5000/ — веб-интерфейс")
-    print("📱 Telegram: /start")
+    print("Flask + Telegram Mini App + Bot")
+    print("http://127.0.0.1:5000/ — веб-интерфейс")
+    print("Telegram: /start")
 
     # Настройка порта для Render.com
     port = int(os.environ.get('PORT', 5000))
