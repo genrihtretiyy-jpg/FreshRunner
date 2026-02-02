@@ -5,6 +5,8 @@ import requests
 import time
 import threading
 import os
+import sqlite3
+import datetime
 from dotenv import load_dotenv
 
 app = Flask(__name__)
@@ -12,6 +14,27 @@ CORS(app)  # Для Telegram Mini App
 
 # Загрузка переменных окружения
 load_dotenv()
+
+# Database initialization
+def init_contracts_db():
+    conn = sqlite3.connect('contracts.db')
+    c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS contracts
+                 (id INTEGER PRIMARY KEY AUTOINCREMENT,
+                  contract_addr TEXT,
+                  total_km REAL,
+                  deployed_at TEXT)''')
+    conn.commit()
+    conn.close()
+
+# Web3 contract data
+RUNNER_ABI = [
+    {"inputs":[{"internalType":"uint256","name":"initialKm","type":"uint256"}],"stateMutability":"nonpayable","type":"constructor"},
+    {"inputs":[],"name":"getKm","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},
+    {"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"}
+]
+
+RUNNER_BYTECODE = "0x608060405234801561001057600080fd5b506040516101408061014083398101806040528101908080519060200190929190805190602001909291908051906020019092919080519060200190929190805190602001909291908051906020019092919050505060008054600160a060020a03191633179055806001819055505061010b806100906000396000f3fe60806040526004361061004c5763ffffffff7c01000000000000000000000000000000000000000000000000000000006000350416632db37e5b8114610051575b600080fd5b34801561005d57600080fd5b5061006661007c565b6040518082815260200191505060405180910390f35b6000543373ffffffffffffffffffffffffffffffffffffffff1614156100b057600054816000819055506001819055505b5056fea165627a7a723058200c1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef0029"
 
 # BLOCKCHAIN
 w3 = Web3(Web3.HTTPProvider('https://ethereum-sepolia.publicnode.com'))
@@ -91,8 +114,38 @@ def index():
     return render_template('index.html')
 
 @app.route('/blockchain/logrun', methods=['POST'])
-def blockchain_logrun():
-    return logrun_endpoint()
+def logrun():
+    try:
+        km = float(request.json.get('km', 5.2))
+        
+        # 1. DEPLOY контракт!
+        contract = w3.eth.contract(abi=RUNNER_ABI, bytecode=RUNNER_BYTECODE)
+        tx = contract.constructor(int(km*10)).transact({
+            'from': w3.eth.default_account,
+            'gas': 2000000, 
+            'gasPrice': w3.to_wei('20', 'gwei')
+        })
+        
+        receipt = w3.eth.wait_for_transaction_receipt(tx)
+        addr = receipt.contractAddress
+        
+        # 2. СОХРАНИМ в БД
+        init_contracts_db()
+        conn = sqlite3.connect('contracts.db')
+        c = conn.cursor()
+        c.execute("INSERT INTO contracts (contract_addr, total_km, deployed_at) VALUES (?, ?, ?)",
+                  (addr, km, datetime.now().isoformat()))
+        conn.commit()
+        conn.close()
+        
+        return {
+            "status": "DEPLOYED",
+            "contract": addr,
+            "km": km,
+            "tx": tx.hex()
+        }
+    except Exception as e:
+        return {"error": str(e)}, 500
 
 @app.route('/logrun', methods=['POST'])  
 def simple_logrun():
