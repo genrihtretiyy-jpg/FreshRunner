@@ -92,20 +92,16 @@ def index():
 
 @app.route('/blockchain/logrun', methods=['POST'])
 def logrun():
-    data = request.json
-    km = float(data.get('distance', 5.2))
-    km_total = int(km * 1000)
-
-    nonce = w3.eth.get_transaction_count(ACCOUNT)
-    tx = contract.functions.logRun(km_total).build_transaction({
-        'from': ACCOUNT, 'nonce': nonce, 'gas': 200000, 'gasPrice': w3.to_wei('10', 'gwei')
-    })
-    signed_tx = w3.eth.account.sign_transaction(tx, PRIVATE_KEY)
-    tx_hash = w3.eth.send_raw_transaction(signed_tx.raw_transaction)
-    w3.eth.wait_for_transaction_receipt(tx_hash)
-
-    print(f"TX sent: 0x{tx_hash.hex()}")
-    return jsonify({"status": "OK", "tx": "0x" + tx_hash.hex()})
+    try:
+        data = request.json
+        km = float(data.get('km', 0.0))
+        return {
+            "status": "SUCCESS", 
+            "km": km,
+            "message": "Flask OK - готов к Web3 deploy!"
+        }
+    except Exception as e:
+        return {"error": str(e)}, 400
 
 @app.route('/blockchain/stats')
 def stats():
