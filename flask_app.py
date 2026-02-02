@@ -91,14 +91,21 @@ def index():
     return render_template('index.html')
 
 @app.route('/blockchain/logrun', methods=['POST'])
-def logrun():
+def blockchain_logrun():
+    return logrun_endpoint()
+
+@app.route('/logrun', methods=['POST'])  
+def simple_logrun():
+    return logrun_endpoint()
+
+def logrun_endpoint():  # ← новое имя!
     try:
         data = request.json
         km = float(data.get('km', 0.0))
         return {
             "status": "SUCCESS", 
             "km": km,
-            "message": "Flask OK - готов к Web3 deploy!"
+            "message": "Flask OK - готов к Web3!"
         }
     except Exception as e:
         return {"error": str(e)}, 400
@@ -125,15 +132,6 @@ def health():
         "contracts_db": os.path.exists('contracts.db'),
         "wallet": ACCOUNT[:10] + "..."
     })
-
-@app.route('/logrun', methods=['POST'])
-def logrun():
-    km = request.json['km']
-    return {
-        "status": "OK - TEST", 
-        "km": km,
-        "message": "Web3 deploy готов, но пока test без блокчейна"
-    }
 
 if __name__ == '__main__':
     print("Flask + Telegram Mini App + Bot")
