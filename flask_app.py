@@ -116,33 +116,33 @@ def index():
 @app.route('/blockchain/logrun', methods=['POST'])
 def logrun():
     try:
-        km = float(request.json.get('km', 5.2))
+        km = float(request.json.get('km', 0.0))
         
-        # 1. DEPLOY контракт!
+        # DEPLOY Runner.sol контракт!
         contract = w3.eth.contract(abi=RUNNER_ABI, bytecode=RUNNER_BYTECODE)
         tx = contract.constructor(int(km*10)).transact({
             'from': w3.eth.default_account,
-            'gas': 2000000, 
+            'gas': 2000000,
             'gasPrice': w3.to_wei('20', 'gwei')
         })
         
         receipt = w3.eth.wait_for_transaction_receipt(tx)
-        addr = receipt.contractAddress
+        contract_addr = receipt.contractAddress
         
-        # 2. СОХРАНИМ в БД
+        # СОХРАНИМ в БД
         init_contracts_db()
         conn = sqlite3.connect('contracts.db')
         c = conn.cursor()
         c.execute("INSERT INTO contracts (contract_addr, total_km, deployed_at) VALUES (?, ?, ?)",
-                  (addr, km, datetime.now().isoformat()))
+                  (contract_addr, km, datetime.now().isoformat()))
         conn.commit()
         conn.close()
         
         return {
-            "status": "DEPLOYED",
-            "contract": addr,
+            "status": "DEPLOYED_TO_SEPOLIA",
+            "contract": contract_addr,
             "km": km,
-            "tx": tx.hex()
+            "tx_hash": tx.hex()
         }
     except Exception as e:
         return {"error": str(e)}, 500
