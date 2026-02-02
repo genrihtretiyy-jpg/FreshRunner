@@ -130,6 +130,15 @@ def health():
         "wallet": ACCOUNT[:10] + "..."
     })
 
+@app.route('/logrun', methods=['POST'])
+def logrun():
+    km = request.json['km']
+    return {
+        "status": "OK - TEST", 
+        "km": km,
+        "message": "Web3 deploy готов, но пока test без блокчейна"
+    }
+
 if __name__ == '__main__':
     print("Flask + Telegram Mini App + Bot")
     print("http://127.0.0.1:5000/ — веб-интерфейс")
