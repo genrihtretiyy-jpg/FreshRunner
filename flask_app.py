@@ -126,23 +126,11 @@ def logrun():
     try:
         km = float(request.json.get('km', 0.0))
         
-        # ПРАВИЛЬНЫЙ Web3 deploy!
-        nonce = w3.eth.get_transaction_count(ACCOUNT.address)
-        tx = contract.constructor(int(km*10)).build_transaction({
-            'from': ACCOUNT.address,
-            'nonce': nonce,
-            'gas': 3000000,
-            'gasPrice': w3.to_wei('20', 'gwei'),
-            'chainId': 11155111  # Sepolia chainId!
-        })
+        # МОК: генерируем фейковый контракт адрес
+        import time
+        contract_addr = f"0x{int(km*100):06x}NORILSK{int(time.time()) % 100000:05x}"
         
-        signed_tx = w3.eth.account.sign_transaction(tx, PRIVATE_KEY)
-        tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
-        receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
-        
-        contract_addr = receipt.contractAddress
-        
-        # СОХРАНИМ в БД
+        # СОХРАНИМ РЕАЛЬНО в БД (эта часть работает!)
         init_contracts_db()
         conn = sqlite3.connect('contracts.db')
         c = conn.cursor()
@@ -152,10 +140,10 @@ def logrun():
         conn.close()
         
         return {
-            "status": "DEPLOYED_TO_SEPOLIA",
+            "status": "DEPLOYED_TO_SEPOLIA_MOCK",
             "contract": contract_addr,
             "km": km,
-            "tx_hash": tx_hash.hex()
+            "message": "БД + /stats работают! Alchemy для реального deploy"
         }
     except Exception as e:
         return {"error": str(e)}, 500
