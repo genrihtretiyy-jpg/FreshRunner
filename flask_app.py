@@ -167,16 +167,39 @@ def logrun_endpoint():  # ← новое имя!
 @app.route('/blockchain/stats')
 def stats():
     try:
-        contract = w3.eth.contract(address=CONTRACT_ADDRESS, abi=CONTRACT_ABI)
-        runs_count = contract.functions.runs().call()
-        total_distance = contract.functions.totalKm().call()
+        # DEBUG: Read from SQLite database
+        init_contracts_db()
+        conn = sqlite3.connect('contracts.db')
+        c = conn.cursor()
+        
+        # Get all contracts with km > 0 (ignore test entries)
+        c.execute("SELECT contract_addr, total_km FROM contracts WHERE total_km > 0")
+        contracts_data = c.fetchall()
+        print("DEBUG CONTRACTS:", contracts_data)
+        
+        # Calculate runs count
+        runs = len(contracts_data)
+        print("DEBUG RUNS:", runs)
+        
+        # Calculate total km with COALESCE for NULL values
+        c.execute("SELECT COALESCE(SUM(total_km), 0) FROM contracts WHERE total_km > 0")
+        total_km_result = c.fetchone()[0]
+        total_km = float(total_km_result) if total_km_result is not None else 0.0
+        print("DEBUG TOTAL:", total_km)
+        
+        # Extract contract addresses
+        contracts = [row[0] for row in contracts_data]
+        
+        conn.close()
+        
         return jsonify({
-            "runs": int(runs_count),
-            "total_km": int(total_distance),
+            "runs": runs,
+            "total_km": total_km,
+            "contracts": contracts,
             "last_updated": "blockchain"
         })
     except Exception as e:
-        return jsonify({"error": f"Blockchain error: {str(e)}"}), 500
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/health')
 def health():
