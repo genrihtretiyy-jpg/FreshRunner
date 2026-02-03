@@ -6,7 +6,7 @@ import time
 import threading
 import os
 import sqlite3
-import datetime
+from datetime import datetime
 from dotenv import load_dotenv
 
 app = Flask(__name__)
