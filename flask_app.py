@@ -126,15 +126,20 @@ def logrun():
     try:
         km = float(request.json.get('km', 0.0))
         
-        # DEPLOY Runner.sol контракт!
-        contract = w3.eth.contract(abi=RUNNER_ABI, bytecode=RUNNER_BYTECODE)
-        tx = contract.constructor(int(km*10)).transact({
-            'from': w3.eth.default_account,
-            'gas': 2000000,
-            'gasPrice': w3.to_wei('20', 'gwei')
+        # ПРАВИЛЬНЫЙ Web3 deploy!
+        nonce = w3.eth.get_transaction_count(ACCOUNT.address)
+        tx = contract.constructor(int(km*10)).build_transaction({
+            'from': ACCOUNT.address,
+            'nonce': nonce,
+            'gas': 3000000,
+            'gasPrice': w3.to_wei('20', 'gwei'),
+            'chainId': 11155111  # Sepolia chainId!
         })
         
-        receipt = w3.eth.wait_for_transaction_receipt(tx)
+        signed_tx = w3.eth.account.sign_transaction(tx, PRIVATE_KEY)
+        tx_hash = w3.eth.send_raw_transaction(signed_tx.rawTransaction)
+        receipt = w3.eth.wait_for_transaction_receipt(tx_hash)
+        
         contract_addr = receipt.contractAddress
         
         # СОХРАНИМ в БД
@@ -150,7 +155,7 @@ def logrun():
             "status": "DEPLOYED_TO_SEPOLIA",
             "contract": contract_addr,
             "km": km,
-            "tx_hash": tx.hex()
+            "tx_hash": tx_hash.hex()
         }
     except Exception as e:
         return {"error": str(e)}, 500
